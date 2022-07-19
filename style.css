@@ -1,0 +1,15 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+/* body {
+  text-align: center;
+  background-color:rgb(209, 183, 208) ;
+  padding-top: 20px;
+  padding-bottom: 20px;
+} */
