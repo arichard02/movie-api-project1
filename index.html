@@ -8,28 +8,36 @@
   </head>
   <body>
     <form>
-    <div id="app"></div>
-    <label class="control-label" for="title">Title:</label>
-    <input type="text" placeholder="Title of movie you want to search for?" id="title" required=required>
-    <br />
-    <label class="control-label" for="year">Year:</label>
-    <input
-      type="number"
-      placeholder="Year"
-      minlength="4"
-      maxlength="4"
-      id="year"
-    />
-    <br>
+      <div id="app"></div>
+      <br />
+      <div class="form-control">
+        <label class="control-label" for="title">Title:</label>
+        <input
+          type="text"
+          placeholder="Type title of movie you want to search for?"
+          id="title"
+          required="required"
+        />
+        <br />
+        <label class="control-label" for="year">Year:</label>
+        <input
+          type="number"
+          placeholder="Year"
+          minlength="4"
+          maxlength="4"
+          id="year"
+        />
+        <br />
 
-    <label class="control-label" for="plot">Plot:</label>
-    <select name="plot" id="plot" style="width: 100px;">
-      <option value="" selected="">Short</option>
-      <option value="full">Full</option>
-  </select>
-<br>
-    <button id="go" type="submit">Go</button>
-  </form>
+        <label class="control-label" for="plot">Plot:</label>
+        <select name="plot" id="plot" style="width: 90px">
+          <option value="" selected="">Short</option>
+          <option value="full">Full</option>
+        </select>
+        <br />
+        <button id="go" type="submit">Go</button>
+      </div>
+    </form>
     <div id="results-container"></div>
     <script type="module" src="/main.js"></script>
   </body>
