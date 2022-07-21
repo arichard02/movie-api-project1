@@ -7,14 +7,17 @@
   margin-top: 60px;
 }
 
+/* added background color */
 body {
   background-color: lightcyan;
 }
 
+/* align all titles */
 div {
   text-align: center;
 }
 
+/* added box around label tags  */
 .control-label {
   display: inline-block;
   width: 200px;
@@ -23,6 +26,7 @@ div {
   padding-left: 20px;
 }
 
+/* added box aroung all form elements */
 .form-control {
   border: solid black 1px;
   text-align: left;
