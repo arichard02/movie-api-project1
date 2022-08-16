@@ -3,7 +3,7 @@ import { apiKey } from "./key.js";
 
 const app = document.querySelector("#app");
 
-document.querySelector("#app").innerHTML = `
+app.innerHTML = `
   <h1>Movie Search Database</h1>
 `;
 
@@ -30,16 +30,24 @@ const search = (ev) => {
 
       // shows what information get displayed
       const movieTemplate = `
-    <div>
+    
+      <movie-display title="${data.Title}"
+        year="${data.Year}"
+        poster="${data.Poster}"
+        rating="${data.Ratings[0].Value}"
+        source="${data.Ratings[0].Source}"
+        released="${data.Released}"
+        plot="${data.Plot}"
+        ></movie-display>
+    `;
+{/* <div>
       <h2> ${data.Title}</h2>
       <img src="${data.Poster}" alt= "poster picture" />
       <p> <strong> Plot: </strong></p>${data.Plot}</p>
       <p> <strong>Year: </strong>${data.Year}</p>
       <p> <strong>Rating: </strong> ${data.Ratings[0].Source}: ${data.Ratings[0].Value}</p>
       <p> <strong>Released: </strong>${data.Released}</p>
-    </div>
-    `;
-
+    </div> */}
       document
         .querySelector("#results-container")
         .insertAdjacentHTML("beforeend", movieTemplate);
