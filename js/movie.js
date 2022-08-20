@@ -1,6 +1,25 @@
 export default class Movie {
     constructor() {}
   
+    toHTML1(data) {
+      const movieTemplate= `
+      <div>
+      <h2>${data.Title}</h2>
+      <img src="${data.Poster}" alt= "poster picture" />
+      <h6>${data.Plot}</h6>
+      <h6>${data.Rating}</h6>
+      <h6>${data.Release}</h6>
+      <h6>${data.Year}</h6>
+      </div>
+      `;
+
+      return movieTemplate;
+    }
+
+
+
+
+
     toHTML(data) {
       // returns an HTML representation of the JSON data
       let movie = document.createElement("div");
