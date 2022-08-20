@@ -61,10 +61,10 @@ export default class Movie {
     }
 
     saveComment () {
-        // updates the comment
+        // updates the comment after the user has added some notes
 
 
-        
+
     }
   }
   

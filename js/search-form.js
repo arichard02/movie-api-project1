@@ -7,7 +7,7 @@ export default class SearchForm {
 
     drawForm() {
         // the job of this method is to diplay the form to HTML
-        const formTemple = `
+        const formTemplate = `
 
       <form>
         <label class="control-label" for="title">Title:</label>
@@ -39,10 +39,13 @@ export default class SearchForm {
     
       </form>
       `;
+      document.querySelector(".form-container").innerHTML = formTemplate;
+      document.querySelector("form").addEventListener("submit", this.search);
     }
 
     search() {
         // the job of this method is to send the searh to the cloud (IM)
+        console.log("Search!");
     }
 
     displayResults() {
