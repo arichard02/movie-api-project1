@@ -4,20 +4,17 @@ export default class Movie {
     toHTML1(data) {
       const movieTemplate= `
       <div>
-      <h2>${data.Title}</h2>
+      <h2> ${data.Title}</h2>
       <img src="${data.Poster}" alt= "poster picture" />
-      <h6>${data.Plot}</h6>
-      <h6>${data.Rating}</h6>
-      <h6>${data.Release}</h6>
-      <h6>${data.Year}</h6>
+      <p> <strong> Plot: </strong></p>${data.Plot}</p>
+      <p> <strong>Year: </strong>${data.Year}</p>
+      <p> <strong>Rating: </strong> ${data.Ratings[0].Source}: ${data.Ratings[0].Value}</p>
+      <p> <strong>Released: </strong>${data.Released}</p>
       </div>
       `;
 
       return movieTemplate;
     }
-
-
-
 
 
     toHTML(data) {
