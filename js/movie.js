@@ -1,23 +1,41 @@
 export default class Movie {
-    constructor() {}
-  
-    toHTML1(data) {
+    constructor(stateManager, movieData) {
+      this.stateManager = stateManager;
+      this.movieData = movieData;
+    }
+
+    attachMovieToDom(parentElement) {
+      const html = this.toHTML(this.movieData);
+      console.log(html);
+      parentElement.insertAdjacentHTML("beforeend", html);
+
+
+       // attach an event handler to the /like button:
+       const likeButtonSelector = `#like_${this.movieData.imdbID}`;
+       console.log(likeButtonSelector);
+       document.querySelector(likeButtonSelector).addEventListener('click', this.like.bind(this));
+    }
+
+   
+
+    toHTML(data) {
+      console.log(data);
       const movieTemplate= `
       <div>
       <h2> ${data.Title}</h2>
       <img src="${data.Poster}" alt= "poster picture" />
       <p> <strong> Plot: </strong></p>${data.Plot}</p>
       <p> <strong>Year: </strong>${data.Year}</p>
-      <p> <strong>Rating: </strong> ${data.Ratings[0].Source}: ${data.Ratings[0].Value}</p>
       <p> <strong>Released: </strong>${data.Released}</p>
+      <button class ="like" id="like_${data.imdbID}">Like</button>
       </div>
       `;
 
       return movieTemplate;
     }
 
-
-    toHTML(data) {
+    // <p> <strong>Rating: </strong> ${data.Ratings[0].Source}: ${data.Ratings[0].Value}</p>
+    toHTML1(data) {
       // returns an HTML representation of the JSON data
       let movie = document.createElement("div");
       let imgCont = document.createElement("div");
@@ -66,14 +84,17 @@ export default class Movie {
         raiting.setAttribute("id", "movie_raiting");
         raiting.style.color = "#646cff";
         raiting.style.textAlign = "center";
+        
       }
       return movie.innerHTML;
   
     }
   
-    like() {
+    like(ev) {
       // notifies the state manager that it would like to
       // save the movie to the DB
+      console.log('Like: add this data to indexedDB!');
+      this.stateManager.notify("like-requested", this.movieData);
     }
 
     saveComment () {

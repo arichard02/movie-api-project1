@@ -1,4 +1,3 @@
+const apiKey = "ef5fab25";
 
-export const apiKey = "ef5fab25";
-
-// export const apiKey;
+export default apiKey;

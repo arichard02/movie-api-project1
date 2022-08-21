@@ -1,7 +1,9 @@
+import  apiKey  from "./key.js";
 export default class SearchForm {
-    constructor() {
 
-
+  constructor(stateManager) {
+    this.stateManager = stateManager; 
+    // conv var so this can used later
 
     }
 
@@ -17,7 +19,7 @@ export default class SearchForm {
         <br />
     
         <label class="control-label" for="year">Year:</label>
-        <input type="number" placeholder="Year" minlength="4" maxlength="4" id="year" required="required" />
+        <input type="number" placeholder="Year" minlength="4" maxlength="4" id="year"/>
     
         <br />
         <br />
@@ -40,14 +42,27 @@ export default class SearchForm {
       </form>
       `;
       document.querySelector(".form-container").innerHTML = formTemplate;
-      document.querySelector("form").addEventListener("submit", this.search);
+      document.querySelector("form").addEventListener("submit", this.search.bind(this));
     }
-
-    search() {
+// adding prevent default when user click 
+// would use fetch method here
+    async search(ev) {
         // the job of this method is to send the searh to the cloud (IM)
+        ev.preventDefault();
         console.log("Search!");
-    }
 
+        // const apiKey = "ef5fab25";
+        const inputVal = document.getElementById("movie_search").value;
+        const resp = await fetch(
+        `https://www.omdbapi.com/?t=${inputVal}&plot=short&apikey=${apiKey}`
+      );
+        const data = await resp.json();
+        console.log(data);
+        
+
+          this.stateManager.notify("movie-found", [data]);
+        }
+     
     displayResults() {
         // the job of this method is to display the movie once the
         // response comes back from the cloud
