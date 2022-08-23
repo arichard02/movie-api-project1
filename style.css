@@ -43,7 +43,7 @@ img {
 
 .pinkify {
   background: red;
-  color: white;
+  color: yellow;
 }
 
 .poster {
@@ -56,12 +56,8 @@ textarea {
   min-height: 120px;
 }
 
-show_notes {
-  float: right;
-}
-
 #show_notes {
-  float: right;
+  float: auto;
   margin-top: 10px;
   margin-bottom: 10px;
 }
