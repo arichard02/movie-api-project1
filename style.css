@@ -41,3 +41,27 @@ img {
   height: 300px;
 }
 
+.pinkify {
+  background: red;
+  color: white;
+}
+
+.poster {
+  width: auto;
+  height: auto;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+}
+
+show_notes {
+  float: right;
+}
+
+#show_notes {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

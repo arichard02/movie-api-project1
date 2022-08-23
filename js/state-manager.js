@@ -18,29 +18,58 @@ export default class StateManager {
         this.favorites = [];
         this.subscribers = [];
         this.searchMode = true;
-        this. showNotes = true;
-        this.datebase = new Database();
+        this.showNotes = false;
+        this.database = new Database();
+        this.loadFavorites();
+ 
 
         // Liztening so that any time a "like-requested" event happens, it
         // will call the 'saveMovieToFavorites" method.
 
-        this.subscribe("like-requested", this.saveMovieToFavorites.bind(this));
+        this.subscribe("like-requested", this.saveMovieToFavorites.bind(this))
+        this.subscribe("movie-found", this.setSearchResults.bind(this));
+        this.subscribe("favorites-loaded", this.setFavorites.bind(this));
+        this.subscribe("show-notes", this.toggleNotes.bind(this));
 
     }
 
-// A method to read a user's favorites from IndexedDB when the page first loads.
+    setSearchResults(movieDataList) {
+        this.searchResults = movieDataList;
+        this.movies = this.searchResults;
+    }
+
+    setFavorites(movieDataList) {
+        this.favorites = movieDataList;
+        this.movies = this.favorites;
+    }
+
+    toggleNotes(val) {
+        console.log(val)
+        this.showNotes = val;
+        this.notify("redraw", this.movies);
+    }
+
+// A method to read a user's favorites from IndexedDB  when the page first loads.
     loadFavorites() {
-        // reads from IndexDB and stores the data to "this.favorites." Then, 
+        // reads from IndexDB and stores the 
+        // data to "this.favorites." Then, 
         // notifies any interested componenets.
+        const callbackFunction = function (movieDataList)  {
+            this.notify("favorites-loaded", movieDataList);
+        };
+// invoke the getAll function 
+// going to load all the records and then notify everyone
+        this.database.getAll(callbackFunction.bind(this));
     }
 
-// A method to add a new movie to the user's favorites and save it to IndexedDB.
+// A method to add a new movie to the user's 
+// favorites and save it to IndexedDB.
 saveMovieToFavorites(movieData) {
     // appends the movie to this.favorites and 
     // stores it in the DB.
     console.log("I am about to save the movie to the DB!");
     console.log(movieData);
-    this.datebase.addOrUpdate(movieData, function() {
+    this.database.addOrUpdate(movieData, function() {
     console.log("Successfully added to the database");
     });
 }

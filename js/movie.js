@@ -2,6 +2,7 @@ export default class Movie {
     constructor(stateManager, movieData) {
       this.stateManager = stateManager;
       this.movieData = movieData;
+      // this.showNotes = false;
     }
 
     attachMovieToDom(parentElement) {
@@ -23,16 +24,37 @@ export default class Movie {
       const movieTemplate= `
       <div>
       <h2> ${data.Title}</h2>
-      <img src="${data.Poster}" alt= "poster picture" />
+      <img src="${data.Poster}" class ="poster" alt= "poster picture" />
       <p> <strong> Plot: </strong></p>${data.Plot}</p>
       <p> <strong>Year: </strong>${data.Year}</p>
       <p> <strong>Released: </strong>${data.Released}</p>
-      <button class ="like" id="like_${data.imdbID}">Like</button>
-      </div>
+      <p> <strong>Rating: </strong> ${data.Ratings[0].Source}: ${data.Ratings[0].Value}</p>
+      <button class ="pinkify" id="like_${data.imdbID}">Like</button>
+     
+      ${this.getNotesForm()}
+      </div> 
       `;
 
       return movieTemplate;
     }
+
+    getNotesForm() {
+     if (this.stateManager.showNotes) {
+      return `
+      <div>
+      <label>Notes</label>
+          <textarea>${this.movieData.notes || ""}</textarea>
+          </div>
+      `;
+    } else  {
+      return "";
+    }
+
+    }
+
+    // showNotes () {
+    //     this.showNotes = true
+    // }
 
     // <p> <strong>Rating: </strong> ${data.Ratings[0].Source}: ${data.Ratings[0].Value}</p>
     toHTML1(data) {
@@ -105,3 +127,5 @@ export default class Movie {
     }
   }
   
+  // showNotes button on each movie
+  //  <button  id="show_${data.imdbID}">Show Notes</button>

@@ -33,8 +33,9 @@ export default class SearchForm {
         <br />
         <br />
     
-        <button id="button" type="submit">Go</button>
-        <button id="favbutton" type="click">Favorites</button>
+        <button id="go"  type="submit" class="pinkify">Submit</button>
+        <button id="reset"  class="pinkify">Reset</button>
+        <button id="show-favorites"  class="pinkify">Favorites</button>
         <!-- <input type="checkbox" id="round" name="round">
         <span class="sliderround"></span> -->
     
@@ -43,6 +44,8 @@ export default class SearchForm {
       `;
       document.querySelector(".form-container").innerHTML = formTemplate;
       document.querySelector("form").addEventListener("submit", this.search.bind(this));
+      document.querySelector("#reset").addEventListener("click", this.clearScreen.bind(this));
+      document.querySelector("#show-favorites").addEventListener("click", this.loadFavorites.bind(this));
     }
 // adding prevent default when user click 
 // would use fetch method here
@@ -61,6 +64,19 @@ export default class SearchForm {
         
 
           this.stateManager.notify("movie-found", [data]);
+        }
+
+        clearScreen(ev) {
+          ev.preventDefault();
+          document.querySelector("#movie_search").value = "";
+          document.querySelector("#year").value = "";
+
+          this.stateManager.notify("clear-everything");
+        }
+
+        loadFavorites(ev) {
+          ev.preventDefault();
+          this.stateManager.loadFavorites();
         }
      
     displayResults() {
