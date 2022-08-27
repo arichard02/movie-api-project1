@@ -1,4 +1,5 @@
 import  apiKey  from "./key.js";
+
 export default class SearchForm {
 
   constructor(stateManager) {
@@ -50,7 +51,7 @@ export default class SearchForm {
 // adding prevent default when user click 
 // would use fetch method here
     async search(ev) {
-        // the job of this method is to send the searh to the cloud (IM)
+        // the job of this method is to send the searh to the cloud (OMDB)
         ev.preventDefault();
         console.log("Search!");
 

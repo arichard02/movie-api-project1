@@ -5,7 +5,7 @@ The state manager's job is to:
     (c) allow components to notify it that data has changed.
     */
 
-import Database from "../database";
+import Database from "../database.js";
 
 export default class StateManager {
     constructor() {
@@ -30,6 +30,7 @@ export default class StateManager {
         this.subscribe("movie-found", this.setSearchResults.bind(this));
         this.subscribe("favorites-loaded", this.setFavorites.bind(this));
         this.subscribe("show-notes", this.toggleNotes.bind(this));
+        this.subscribe("save-requested", this.saveMovieToFavorites.bind(this));
 
     }
 
@@ -44,7 +45,6 @@ export default class StateManager {
     }
 
     toggleNotes(val) {
-        console.log(val)
         this.showNotes = val;
         this.notify("redraw", this.movies);
     }
@@ -78,8 +78,10 @@ saveMovieToFavorites(movieData) {
 // A method to notify components that something has changed.
 notify(eventName, data) {
 // loops through all of the subscribers and invokes the subscribers's function
+// if they're interested in the particular event
     for(let i = 0; i < this.subscribers.length; i++) {
         const subscriber = this.subscribers[i];
+        
         const subscriberEvent = subscriber[0];
         const callbackFunction = subscriber[1];
 // is event that was just fired someth

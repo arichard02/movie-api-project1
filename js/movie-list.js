@@ -4,38 +4,31 @@ export default class MovieList {
   constructor(stateManager) {
     this.stateManager = stateManager;
     this.stateManager.subscribe("clear-everything", this.clear.bind(this));
-    this.stateManager.subscribe(
-      "favorites-loaded",
-      this.drawMovieToScreen.bind(this)
-    );
-    this.stateManager.subscribe(
-      "movie-found",
-      this.drawMovieToScreen.bind(this)
-    );
+    this.stateManager.subscribe("favorites-loaded",this.drawMovieToScreen.bind(this));
+    this.stateManager.subscribe("movie-found",this.drawMovieToScreen.bind(this));
     this.stateManager.subscribe("redraw", this.drawMovieToScreen.bind(this));
+
   }
 
   // this function should fire:
-  // when server give back a movie result after they've click search
+  // * when server give back a movie result after they've clicked search
   drawMovieToScreen(movieDataList) {
-    console.log(this.stateManager.showNotes);
+    console.log(movieDataList);
     this.clear();
-    //  the job of this method is to draw all  of the
-    // movies to the screen
 
+    //  the region of the HTML that we wants to add our movie.
     const parentElement = document.querySelector(".movies");
-
+    // the job of this method is to draw all of the 
+        // movies to the screen.
     for (let i = 0; i < movieDataList.length; i++) {
       // create movie object
       const movie = new Movie(this.stateManager, movieDataList[i]);
 
-      // get HTML representation from the movie data:
-      
 
-      // insert HTML representing a simple movie into the DOM:
+      // attch the movie to the DOM:
       movie.attachMovieToDom(parentElement);
     }
-
+      // adding the show notes button to the top:
     let buttonText = "Show Notes";
     if(this.stateManager.showNotes) {
         buttonText = "Hide Notes";
@@ -54,7 +47,7 @@ export default class MovieList {
             this.stateManager.notify("show-notes", false)
 
         } else {
-            // notify state manager
+            // notify the state manager
             this.stateManager.notify("show-notes", true)
 
         }
